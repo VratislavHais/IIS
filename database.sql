@@ -31,6 +31,7 @@ CREATE TABLE zamestnanec(
 	id_zamestnance int NOT NULL,
 	jmeno VARCHAR(40),
 	prijmeni VARCHAR(40),
+	heslo VARCHAR(20) NOT NULL,
 	datum_nar DATE NOT NULL,
 	prava int NOT NULL,
 	rod_cislo number(10) NOT NULL,
