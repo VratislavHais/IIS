@@ -3,6 +3,13 @@ form {
 	width:250px;
 	top: 50%;
 }
+
+.bordered {
+	border-collapse: collapse;
+	border: 1px solid black;
+	font-size: 20px;
+}
+
 #login {
 	position: absolute;
 	width: 300px;
@@ -42,4 +49,27 @@ form {
 	height: 40px;
 	background-color: rgb(0, 77, 0);
 	outline: none; 
+}
+
+#menu {
+	margin: 0 auto;
+	height: 200px;
+}
+
+button {
+	border-radius: 5px;
+	background-color: rgb(0, 77, 0);
+	border-color: rgb(0, 77, 0);
+	outline: none;
+	text-align: center;
+}
+
+.menuButton {
+	border-radius: 5px;
+	background-color: rgb(0, 77, 0);
+	border-color: rgb(0, 77, 0);
+	width: 120px;
+	height: 50px;
+	outline: none;
+	font-size: 15px;
 }

@@ -43,7 +43,7 @@ CREATE TABLE zamestnanec(
 	id_zamestnance int NOT NULL,
 	jmeno VARCHAR(40),
 	prijmeni VARCHAR(40),
-  login VARCHAR(20),
+  login VARCHAR(20) NOT NULL,
   heslo VARCHAR(20) NOT NULL,
 	datum_nar DATE NOT NULL,
 	prava int NOT NULL,
@@ -295,7 +295,7 @@ END;
 
 
 /* Inserting data to tables*/
-INSERT INTO zamestnanec (id_zamestnance, jmeno, prijmeni, login, heslo, datum_nar, prava, rod_cislo, plat) VALUES(null, 'Vratislav', 'Hais', 'Stager', 'admin', TO_DATE('1995-02-14','YYYY-MM-DD'), '1', '5412036069', '1000000000000000');
+INSERT INTO zamestnanec (id_zamestnance, jmeno, prijmeni, login, heslo, datum_nar, prava, rod_cislo, plat) VALUES(null, 'Vratislav', 'Hais', 'Stager', 'admin', DATE('1995-02-14','YYYY-MM-DD'), '1', '5412036069', '1000000000000000');
 
 INSERT INTO pronajimatel (id_pronajimatele, nazev, kontakt, poplatek) VALUES(null, 'UMPRUM', '731548762', 'ano');
 INSERT INTO pronajimatel (id_pronajimatele, nazev, kontakt, poplatek) VALUES(null, 'Pavel Novák', '609548795', 'ne');
