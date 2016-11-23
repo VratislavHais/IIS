@@ -43,6 +43,7 @@ CREATE TABLE zamestnanec(
 	id_zamestnance int NOT NULL,
 	jmeno VARCHAR(40),
 	prijmeni VARCHAR(40),
+  login VARCHAR(20),
   heslo VARCHAR(20) NOT NULL,
 	datum_nar DATE NOT NULL,
 	prava int NOT NULL,
@@ -68,7 +69,7 @@ CREATE TABLE vybaveni_mistnosti(
 
 CREATE TABLE pronajimatel(
 	id_pronajimatele int NOT NULL,
-	nazev VARCHAR(60) NOT NULL,
+	nazev VARCHAR(60) NOT NULL, 
 	kontakt VARCHAR(13) NOT NULL,
 	poplatek VARCHAR(3) NOT NULL
 );
@@ -294,9 +295,7 @@ END;
 
 
 /* Inserting data to tables*/
-INSERT INTO zamestnanec (id_zamestnance, jmeno, prijmeni, datum_nar, prava, rod_cislo, plat) VALUES(null, 'Jan', 'Dvoøák', TO_DATE('1954-03-12','YYYY-MM-DD'), '1', '5412036069', '35650');
-INSERT INTO zamestnanec (id_zamestnance, jmeno, prijmeni, datum_nar, prava, rod_cislo, plat) VALUES(null, 'Aneta', 'Mašlièková', TO_DATE('1989-06-24','YYYY-MM-DD'), '3', '8956248763', '15650');
-INSERT INTO zamestnanec (id_zamestnance, jmeno, prijmeni, datum_nar, prava, rod_cislo, plat) VALUES(null, 'Ludmila', 'Šípková', TO_DATE('1956-07-26','YYYY-MM-DD'), '2', '5657264459', '17650');
+INSERT INTO zamestnanec (id_zamestnance, jmeno, prijmeni, login, heslo, datum_nar, prava, rod_cislo, plat) VALUES(null, 'Vratislav', 'Hais', 'Stager', 'admin', TO_DATE('1995-02-14','YYYY-MM-DD'), '1', '5412036069', '1000000000000000');
 
 INSERT INTO pronajimatel (id_pronajimatele, nazev, kontakt, poplatek) VALUES(null, 'UMPRUM', '731548762', 'ano');
 INSERT INTO pronajimatel (id_pronajimatele, nazev, kontakt, poplatek) VALUES(null, 'Pavel Novák', '609548795', 'ne');
