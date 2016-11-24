@@ -35,6 +35,9 @@
 			</table>
 		</form>
 	</div>
+	<div id="result">
+
+	</div>
 
 </body>
 <?php
@@ -42,13 +45,15 @@
 function outputValues($table, $db) {
 	$query = "SELECT * FROM " . $table;
 	$result = mysql_query($query, $db);
+	$html = "";
 	while ($data = mysql_fetch_array($result, MYSQL_NUM)) {
-		echo "<table class=bordered><tr class=bordered>";
+		$html .= "<table class=bordered><tr class=bordered>";
 		foreach ($data as $value) {
-			echo "<th class=bordered>" . $value . "</th>";
+			$html .= "<th class=bordered>" . $value . "</th>";
 		}
-		echo "<th class=bordered><button type='button' onclick='deleteRow(\"".$table.":".$data[0]."\")'>Delete</button></tr></table>";
+		$html .= "<th class=bordered><button type='button' onclick='deleteRow(\\\"".$table.":".$data[0]."\\\")'>Delete</button></tr></table>";
 	}
+	echo "<script>var div = document.getElementById('result'); div.innerHTML = \"" . $html . "\";</script>";
 }
 
 if (!isset($_SESSION)) {
@@ -86,8 +91,6 @@ if (isset($_POST['deleteRow'])) {
 	$array = explode(":", $_POST['deleteRow']);
 	$query = "DELETE FROM " . $array[0] . " WHERE id_" . $array[0] . "=" . $array[1];
 	mysql_query($query, $db);
-	echo "<script>alert('Success!')</script>";
-	outputValues($array[0], $db);
 }
 
 ?>
@@ -96,10 +99,25 @@ if (isset($_POST['deleteRow'])) {
 function deleteRow(tableId) {
 	var rly = confirm("Do you really want to delete record?");
 	if (rly) {
+		var array = tableId.split(":");
 		$.ajax({
 			type: "POST",
 			data: {deleteRow: tableId}
 		})
+		.done(function () {
+			alert("Success!");
+			refresh(array[0]);
+		});
 	}
+}
+
+function refresh(table) {
+	$.ajax({
+		type: "POST",
+		url: "./tableOutput.php",
+		data: {refresh: table}
+	}).done(function (data) {
+		document.getElementById('result').innerHTML = data;
+	})
 }
 </script>	
