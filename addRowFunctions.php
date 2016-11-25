@@ -18,7 +18,7 @@ if (isset($_POST['exposition'])) {
 	}
 }
 
-if (isset($_POST['room'])) {
+if (isset($_POST['room1'])) {
 	if (isset($_POST['typExp']) and isset($_POST['plocha']) and isset($_POST['cena']) and isset($_POST['tvar']) and isset($_POST['idZam'])) {
 		$query = "INSERT INTO `xhaisv00`.`mistnost` (`id_mistnost`, `typ_exp`, `plocha`, `cena`, `tvar`, `id_zamestnance`) VALUES (NULL, '".$_POST['typExp']."', '".$_POST['plocha']."', '".$_POST['cena']."', '".$_POST['tvar']."', '".$_POST['idZam']."');";
 		if (mysql_query($query)) {
@@ -36,9 +36,9 @@ if (isset($_POST['room'])) {
 	}
 }
 
-if (isset($_POST['order'])) {
+if (isset($_POST['order1'])) {
 	if (isset($_POST['odOrd']) and isset($_POST['doOrd']) and isset($_POST['poplatek']) and isset($_POST['idPron']) and isset($_POST['idExp']) and isset($_POST['idZam'])) {
-		$query = "INSERT INTO `xhaisv00`.`objednavka` (`id_objednavka`, `od`, `do`, `poplatek`, `id_pronajimatele`, `id_expozice`, `id_zamestnance`) VALUES (NULL, '".$_POST['odOrd']."', '".$_POST['doOrd']."', '".$_POST['poplatek']."', '".$_POST['idPron']."', '".$_POST['idExp']."', '"$_POST['idZam']."');";
+		$query = "INSERT INTO `xhaisv00`.`objednavka` (`id_objednavka`, `od`, `do`, `poplatek`, `id_pronajimatele`, `id_expozice`, `id_zamestnance`) VALUES (NULL, '".$_POST['odOrd']."', '".$_POST['doOrd']."', '".$_POST['poplatek']."', '".$_POST['idPron']."', '".$_POST['idExp']."', '".$_POST['idZam']."');";
 		if (mysql_query($query)) {
 			echo "<script>alert('Success!');</script>";
 			outputValues('objednavka', $db);
@@ -55,7 +55,7 @@ if (isset($_POST['order'])) {
 	}
 }
 
-if (isset($_POST['lessor'])) {
+if (isset($_POST['lessor1'])) {
 	if (isset($_POST['nazev']) and isset($_POST['kontakt']) and isset($_POST['poplatek'])) {
 		$query = "INSERT INTO `xhaisv00`.`pronajimatel` (`id_pronajimatel`, `nazev`, `kontakt`, `poplatek`) VALUES (NULL, '".$_POST['nazev']."', '".$_POST['kontakt']."', '".$_POST['poplatek']."');";
 		if (mysql_query($query)) {
@@ -71,9 +71,9 @@ if (isset($_POST['lessor'])) {
 	}
 }
 
-if (isset($_POST['artist'])) {
+if (isset($_POST['artist1'])) {
 	if (isset($_POST['jmeno']) and isset($_POST['prijmeni']) and isset($_POST['specializace']) and isset($_POST['idZam'])) {
-		$query = "INSERT INTO `xhaisv00`.`umelec` (`id_umelec`, `jmeno`, `prijmeni`, `specializace`, `id_zamestnance`) VALUES (NULL, '".$_POST['jmeno']."', '".$_POST['prijmeni']."', '".$_POST['specializace']."', '"$_POST['idZam']."');";
+		$query = "INSERT INTO `xhaisv00`.`umelec` (`id_umelec`, `jmeno`, `prijmeni`, `specializace`, `id_zamestnance`) VALUES (NULL, '".$_POST['jmeno']."', '".$_POST['prijmeni']."', '".$_POST['specializace']."', '".$_POST['idZam']."');";
 		if (mysql_query($query)) {
 			echo "<script>alert('Success!');</script>";
 			outputValues('umelec', $db);
@@ -85,6 +85,46 @@ if (isset($_POST['artist'])) {
 	}
 	else {
 		echo "<script>alert('Please fill every field')</script>";
+	}
+}
+
+if (isset($_POST['employee1'])) {
+	if (isset($_POST['jmeno']) and isset($_POST['prijmeni']) and isset($_POST['datumNar']) and isset($_POST['prava']) and isset($_POST['rodneC']) and isset($_POST['plat'])) {
+		$length = strlen($_POST['prijmeni']);
+		$login = "x";
+		if ($length >= 5) {
+			$login .= substr($_POST['prijmeni'], 0, 5);
+		}
+		else {
+			$login .= $_POST['prijmeni'] . substr($_POST['jmeno'], 0, 5-$length);
+		}
+		$number = mysql_query("SELECT MAX(`id_zamestnanec`) FROM zamestnanec") + 1;
+		if ($number < 10) {
+			$number = "0" . $number;
+		}
+		$login .= $number;
+		$login = strtolower($login);
+		//random password generator
+		$characters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		$numberOfChars = strlen($characters);
+		$password = "";
+		for ($i = 0; $i < 9; $i++) {
+			$password .= $characters[rand(0, $numberOfChars - 1)];
+		}
+		$query = "INSERT INTO `xhaisv00`.`zamestnanec` (`id_zamestnanec`, `jmeno`, `prijmeni`, `login`, `heslo`, `datum_nar`, `prava`, `rod_cislo`, `plat`) VALUES (NULL, '".$_POST['jmeno']."', '".$_POST['prijmeni']."', '".$login."', '".$password."', '".$_POST['datumNar']."', '".$_POST['prava']."', '".$_POST['rodneC']."', '".$_POST['plat']."');";
+		if (mysql_query($query)) {
+			echo "<script>alert('Success!');</script>";
+			outputValues('zamestnanec', $db);
+			unset($_POST['jmeno']);
+			unset($_POST['prijmeni']);
+			unset($_POST['datumNar']);
+			unset($_POST['prava']);
+			unset($_POST['rodneC']);
+			unset($_POST['plat']);
+		}
+		else {
+			echo "<script>alert('Please fill every field')</script>";
+		}
 	}
 }
 

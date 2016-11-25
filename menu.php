@@ -6,6 +6,9 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
 <body>
+	<form method="POST" style="position:absolute;top:0px;right:0px;">		<!-- little cheat, so I dont need to use AJAX :) -->
+		<input class="formButton" type="submit" name="logout" value="logout" />
+	</form>
 	<div id="menu">
 		<form method="POST" id="menu">
 			<input type="hidden" name="action" value="submit" />
@@ -48,10 +51,21 @@ function outputValues($table, $db) {
 	$html = "";
 	while ($data = mysql_fetch_array($result, MYSQL_NUM)) {
 		$html .= "<table class=bordered><tr class=bordered>";
-		foreach ($data as $value) {
+		foreach ($data as $key => $value) {
+			if (($table == "zamestnanec") && ($_SESSION['permission'] == 0) && ($key == 4 || $key == 7 || $key == 8)) {
+				$html .= "<th class=bordered>********</th>";
+				continue;
+			}
 			$html .= "<th class=bordered>" . $value . "</th>";
 		}
+		if ((($table == "expozice") || ($table == "mistnost") || ($table == "zamestnanec")) && $_SESSION['permission'] == 0) {
+			continue;
+		}
 		$html .= "<th class=bordered><button type='button' onclick='deleteRow(\\\"".$table.":".$data[0]."\\\")'>Delete</button></tr></table>";
+	}
+	if ((($table == "expozice") || ($table == "mistnost") || ($table == "zamestnanec")) && $_SESSION['permission'] == 0) {
+		echo "<script>var div = document.getElementById('result'); div.innerHTML = \"" . $html . "\";</script>";
+		return;
 	}
 	$html .= "<button type='button' onclick='addRow(\\\"".$table."\\\")'>Add</button>";
 	echo "<script>var div = document.getElementById('result'); div.innerHTML = \"" . $html . "\";</script>";
@@ -92,6 +106,12 @@ if (isset($_POST['deleteRow'])) {
 	$array = explode(":", $_POST['deleteRow']);
 	$query = "DELETE FROM " . $array[0] . " WHERE id_" . $array[0] . "=" . $array[1];
 	mysql_query($query, $db);
+}
+
+if (isset($_POST['logout'])) {
+	session_unset();
+    session_destroy();
+    header("Location: ./index.php");
 }
 
 include 'addRowFunctions.php';

@@ -8,12 +8,23 @@ function outputValues($table, $db) {
 	$html = "";
 	while ($data = mysql_fetch_array($result, MYSQL_NUM)) {
 		$html .= "<table class=bordered><tr class=bordered>";
-		foreach ($data as $value) {
+		foreach ($data as $key => $value) {
+			if (($table == "zamestnanec") && ($_SESSION['permission'] == 0) && ($key == 4 || $key == 7 || $key == 8)) {
+				$html .= "<th class=bordered>********</th>";
+				continue;
+			}
 			$html .= "<th class=bordered>" . $value . "</th>";
 		}
-		$html .= "<th class=bordered><button type='button' onclick='deleteRow(\"".$table.":".$data[0]."\")'>Delete</button></tr></table>";
+		if ((($table == "objednavka") || ($table == "pronajimatel") || ($table == "umelec")) && $_SESSION['permission'] == 0) {
+			continue;
+		}
+		$html .= "<th class=bordered><button type='button' onclick='deleteRow(\\\"".$table.":".$data[0]."\\\")'>Delete</button></tr></table>";
 	}
-	$html .= "<button type='button' onclick='addRow(\"".$table."\")'>Add</button>";
+	if ((($table == "objednavka") || ($table == "pronajimatel") || ($table == "umelec")) && $_SESSION['permission'] == 0) {
+		echo "<script>var div = document.getElementById('result'); div.innerHTML = \"" . $html . "\";</script>";
+		return;
+	}
+	$html .= "<button type='button' onclick='addRow(\\\"".$table."\\\")'>Add</button>";
 	return $html;
 }
 
@@ -46,7 +57,7 @@ function addRowExp() {
 function addRowRoom() {
 	return '<div class="addForm">
 			<form method="POST">
-				<input type="hidden" name="room" value="submit" />
+				<input type="hidden" name="room1" value="submit" />
 				<br>
 				<label class="formLabel">Typ expozice: </label>
 				<center><input class="formInput" type="text" name="typExp"></center>
@@ -72,7 +83,7 @@ function addRowRoom() {
 function addRowOrder() {
 	return '<div class="addForm">
 			<form method="POST">
-				<input type="hidden" name="order" value="submit" />
+				<input type="hidden" name="order1" value="submit" />
 				<br>
 				<label class="formLabel">Od (rrrr-mm-dd): </label>
 				<center><input class="formInput" type="text" name="odOrd"></center>
@@ -101,7 +112,7 @@ function addRowOrder() {
 function addRowLessor() {
 	return '<div class="addForm">
 			<form method="POST">
-				<input type="hidden" name="lessor" value="submit" />
+				<input type="hidden" name="lessor1" value="submit" />
 				<br>
 				<label class="formLabel">Nazev: </label>
 				<center><input class="formInput" type="text" name="nazev"></center>
@@ -121,7 +132,7 @@ function addRowLessor() {
 function addRowArtist() {
 	return '<div class="addForm">
 			<form method="POST">
-				<input type="hidden" name="artist" value="submit" />
+				<input type="hidden" name="artist1" value="submit" />
 				<br>
 				<label class="formLabel">Jmeno: </label>
 				<center><input class="formInput" type="text" name="jmeno"></center>
@@ -144,7 +155,7 @@ function addRowArtist() {
 function addRowEmployee() {
 	return '<div class="addForm">
 			<form method="POST">
-				<input type="hidden" name="employee" value="submit" />
+				<input type="hidden" name="employee1" value="submit" />
 				<br>
 				<label class="formLabel">Jmeno: </label>
 				<center><input class="formInput" type="text" name="jmeno"></center>
