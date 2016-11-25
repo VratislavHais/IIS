@@ -53,6 +53,7 @@ function outputValues($table, $db) {
 		}
 		$html .= "<th class=bordered><button type='button' onclick='deleteRow(\\\"".$table.":".$data[0]."\\\")'>Delete</button></tr></table>";
 	}
+	$html .= "<button type='button' onclick='addRow(\\\"".$table."\\\")'>Add</button>";
 	echo "<script>var div = document.getElementById('result'); div.innerHTML = \"" . $html . "\";</script>";
 }
 
@@ -93,6 +94,8 @@ if (isset($_POST['deleteRow'])) {
 	mysql_query($query, $db);
 }
 
+include 'addRowFunctions.php';
+
 ?>
 
 <script>
@@ -109,6 +112,17 @@ function deleteRow(tableId) {
 			refresh(array[0]);
 		});
 	}
+}
+
+function addRow(table) {
+	$.ajax({
+		type: "POST",
+		url: "./tableOutput.php",
+		data: {addRow: table}
+	})
+	.done(function (data) {
+		document.getElementById('result').innerHTML = data;
+	})
 }
 
 function refresh(table) {

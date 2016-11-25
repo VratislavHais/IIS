@@ -23,11 +23,11 @@ form {
 	border-radius: 10px;
 }
 
-#loginLabel {
+.formLabel {
 	font-size: 20px;
 }
 
-#loginInput {
+.formInput {
 	border-radius: 7px;
 	border: 2px solid rgb(0, 77, 0);
 	width: 100%;
@@ -35,12 +35,12 @@ form {
 	font-size: 30px;
 }
 
-#loginInput:focus {
+.formInput:focus {
 	outline: none;
 	box-shadow: 1px 0px 22px 1px rgb(0, 230, 0);
 }
 
-#loginButton {
+.formButton {
 	border-radius: 7px;
 	border: 2px solid rgb(0, 77, 0);
 	float: right;
@@ -49,6 +49,17 @@ form {
 	height: 40px;
 	background-color: rgb(0, 77, 0);
 	outline: none; 
+}
+
+.backFormButton {
+	border-radius: 7px;
+	border: 2px solid rgb(0, 77, 0);
+	float: left;
+	font-size: 20px;
+	width: 100px;
+	height: 40px;
+	background-color: rgb(0, 77, 0);
+	outline: none;
 }
 
 #menu {
