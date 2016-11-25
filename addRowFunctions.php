@@ -98,7 +98,10 @@ if (isset($_POST['employee1'])) {
 		else {
 			$login .= $_POST['prijmeni'] . substr($_POST['jmeno'], 0, 5-$length);
 		}
-		$number = mysql_query("SELECT MAX(`id_zamestnanec`) FROM zamestnanec") + 1;
+		$number = mysql_query("SELECT MAX(  `id_zamestnanec` ) FROM zamestnanec");
+		$number = mysql_fetch_array($number);
+		$number = $number[0] + 1;
+		echo "<script>console.log(".$number.")</script>";
 		if ($number < 10) {
 			$number = "0" . $number;
 		}
@@ -108,7 +111,7 @@ if (isset($_POST['employee1'])) {
 		$characters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		$numberOfChars = strlen($characters);
 		$password = "";
-		for ($i = 0; $i < 9; $i++) {
+		for ($i = 0; $i < 8; $i++) {
 			$password .= $characters[rand(0, $numberOfChars - 1)];
 		}
 		$query = "INSERT INTO `xhaisv00`.`zamestnanec` (`id_zamestnanec`, `jmeno`, `prijmeni`, `login`, `heslo`, `datum_nar`, `prava`, `rod_cislo`, `plat`) VALUES (NULL, '".$_POST['jmeno']."', '".$_POST['prijmeni']."', '".$login."', '".$password."', '".$_POST['datumNar']."', '".$_POST['prava']."', '".$_POST['rodneC']."', '".$_POST['plat']."');";

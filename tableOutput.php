@@ -18,13 +18,13 @@ function outputValues($table, $db) {
 		if ((($table == "objednavka") || ($table == "pronajimatel") || ($table == "umelec")) && $_SESSION['permission'] == 0) {
 			continue;
 		}
-		$html .= "<th class=bordered><button type='button' onclick='deleteRow(\\\"".$table.":".$data[0]."\\\")'>Delete</button></tr></table>";
+		$html .= "<th class=bordered><button type='button' onclick='deleteRow(\"".$table.":".$data[0]."\")'>Delete</button></tr></table>";
 	}
 	if ((($table == "objednavka") || ($table == "pronajimatel") || ($table == "umelec")) && $_SESSION['permission'] == 0) {
 		echo "<script>var div = document.getElementById('result'); div.innerHTML = \"" . $html . "\";</script>";
 		return;
 	}
-	$html .= "<button type='button' onclick='addRow(\\\"".$table."\\\")'>Add</button>";
+	$html .= "<button type='button' onclick='addRow(\"".$table."\")'>Add</button>";
 	return $html;
 }
 
@@ -179,6 +179,10 @@ function addRowEmployee() {
 				<button class="backFormButton" type="button" onclick="refresh(\'zamestnanec\')">Back</button>
 			</form>
 		</div>';
+}
+
+if (!isset($_SESSION)) {
+	session_start();
 }
 
 if (isset($_POST['refresh'])) {

@@ -5,12 +5,12 @@
   <link rel="stylesheet" href="style.css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
-<body>
-	<form method="POST" style="position:absolute;top:0px;right:0px;">		<!-- little cheat, so I dont need to use AJAX :) -->
-		<input class="formButton" type="submit" name="logout" value="logout" />
-	</form>
+<body background="./images/header-illidan.jpg">
 	<div id="menu">
-		<form method="POST" id="menu">
+		<form method="POST" style="position:absolute;top:0px;right:0px;">		<!-- little cheat, so I dont need to use AJAX :) -->
+			<input class="formButton" type="submit" name="logout" value="logout" />
+		</form>
+		<center><form method="POST" id="menu">
 			<input type="hidden" name="action" value="submit" />
 			<table>
 				<tr>
@@ -40,7 +40,7 @@
 	</div>
 	<div id="result">
 
-	</div>
+	</div></center>
 
 </body>
 <?php
