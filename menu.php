@@ -53,14 +53,17 @@ function outputValues($table, $db) {
 		$html .= "<tr class=bordered>";
 		foreach ($data as $key => $value) {
 			if (($table == "zamestnanec") && ($_SESSION['permission'] == 0) && ($key == 4 || $key == 7 || $key == 8)) {
-				$html .= "<th class=bordered>********</th>";
 				continue;
 			}
 			$html .= "<th class=bordered>" . $value . "</th>";
 		}
 		if ($table == "mistnost") {
-			$html .= "<th class=bordered><button type='button' onclick='showRoomStuff(".$data[0].")'>equipment</button></th>";
+			$html .= "<th class=bordered><button type='button' onclick='showRoomStuff(".$data[0].")'>Equipment</button></th>";
 		}
+		if (($table == "zamestnanec") && $_SESSION['permission'] == 0) {
+			continue;
+		}
+		$html .= "<th class=bordered><button type='button' onclick='editRowForms(\\\"".$table.":".$data[0]."\\\")'>Edit</button></th>";
 		if ((($table == "expozice") || ($table == "mistnost") || ($table == "zamestnanec")) && $_SESSION['permission'] == 0) {
 			continue;
 		}
@@ -84,6 +87,7 @@ function showRoomStuff($db) {
 		foreach ($data as $value) {
 			$html .= "<th class=bordered>" . $value . "</th>";
 		}
+		$html .= "<th class=bordered><button type='button' onclick='editRow(\\\"vybaveni_mistnosti:".$data[0].":".$_SESSION['idMistnosti']."\\\")'>Edit</button></th>";
 		$html .= "<th class=bordered><button type='button' onclick='deleteRow(\\\"vybaveni_mistnosti:".$data[0].":".$_SESSION['idMistnosti']."\\\")'>Delete</button></tr>";
 	}
 	$html .= "</table>";
@@ -169,6 +173,24 @@ function addRow(table) {
 	.done(function (data) {
 		document.getElementById('result').innerHTML = data;
 	})
+}
+
+function editRowForms(tableId) {
+	//var array = tableId.split(":");
+	$.ajax({
+		type: "POST",
+		url: "./editRowForms.php",
+		data: {editRow: tableId}
+	})
+	.done(function (data) {
+		document.getElementById('result').innerHTML = data;
+		/*if (array[0] == "vybaveni_mistnosti") {
+			showRoomStuff(array[2]);
+		}
+		else {
+			refresh(array[0]);
+		}*/
+	});
 }
 
 function showRoomStuff(roomId) {

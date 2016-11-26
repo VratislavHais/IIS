@@ -10,16 +10,19 @@ function outputValues($table, $db) {
 		$html .= "<tr class=bordered>";
 		foreach ($data as $key => $value) {
 			if (($table == "zamestnanec") && ($_SESSION['permission'] == 0) && ($key == 4 || $key == 7 || $key == 8)) {
-				$html .= "<th class=bordered>********</th>";
 				continue;
 			}
 			$html .= "<th class=bordered>" . $value . "</th>";
 		}
-		if ((($table == "objednavka") || ($table == "pronajimatel") || ($table == "umelec")) && $_SESSION['permission'] == 0) {
+		if ($table == "mistnost") {
+			$html .= "<th class=bordered><button type='button' onclick='showRoomStuff(".$data[0].")'>Equipment</button></th>";
+		}
+		if (($table == "zamestnanec") && $_SESSION['permission'] == 0) {
 			continue;
 		}
-		if ($table == "mistnost") {
-			$html .= "<th class=bordered><button type='button' onclick='showRoomStuff(".$data[0].")'>equipment</button></th>";
+		$html .= "<th class=bordered><button type='button' onclick='editRowForms(\"".$table.":".$data[0]."\")'>Edit</button></th>";
+		if ((($table == "objednavka") || ($table == "pronajimatel") || ($table == "umelec")) && $_SESSION['permission'] == 0) {
+			continue;
 		}
 		$html .= "<th class=bordered><button type='button' onclick='deleteRow(\"".$table.":".$data[0]."\")'>Delete</button></tr>";
 	}

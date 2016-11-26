@@ -16,8 +16,10 @@ form {
 }
 
 #result {
+	margin: 0 auto;
 	background: white;
-	height: 70%;
+	height: 60%;
+	width: 70%;
 }
 
 #login {
@@ -76,7 +78,7 @@ form {
 	position: relative;
 	margin: 0 auto;
 	width: 70%;
-	height: 30%;
+	height: 40%;
 	background: white;
 }
 
