@@ -1,5 +1,9 @@
 <?php
 
+if (!isset($_SESSION)) {
+	session_start();
+}
+
 if (isset($_POST['exposition'])) {
 	if (isset($_POST['typ']) and isset($_POST['umelec']) and isset($_POST['od']) and isset($_POST['do']) and isset($_POST['idZam'])) {
 		$query = "INSERT INTO `xhaisv00`.`expozice` (`id_expozice`, `typ`, `umelec`, `od`, `do`, `id_zamestnance`) VALUES (NULL, '".$_POST['typ']."', '".$_POST['umelec']."', '".$_POST['od']."', '".$_POST['do']."', '".$_POST['idZam']."');";
@@ -128,6 +132,22 @@ if (isset($_POST['employee1'])) {
 		else {
 			echo "<script>alert('Please fill every field')</script>";
 		}
+	}
+}
+
+if (isset($_POST['equipment'])) {
+	if (isset($_POST['typ']) and isset($_POST['pocet'])) {
+		$query = "INSERT INTO `xhaisv00`.`vybaveni_mistnosti` (`id_vybaveni_mistnosti`, `typ`, `pocet`, `id_mistnosti`) VALUES (NULL, '".$_POST['typ']."', '".$_POST['pocet']."', '".$_SESSION['idMistnosti']."');";
+		echo "<script>console.log(\"".$query."\");</script>";
+		if (mysql_query($query)) {
+			echo "<script>alert('Success!');</script>";
+			showRoomStuff($db);
+			unset($_POST['typ']);
+			unset($_POST['pocet']);
+		}
+	}
+	else {
+		echo "<script>alert('Please fill every field')</script>";
 	}
 }
 

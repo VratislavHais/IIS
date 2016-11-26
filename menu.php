@@ -15,24 +15,24 @@
 			<table>
 				<tr>
 					<th>
-						<input class="menuButton" type="submit" name="exp" value="exposition edit" />
+						<input class="menuButton" type="submit" name="exp" value="expositions" />
 					</th>
 					<th>
-						<input class="menuButton" type="submit" name="room" value="room edit" />
+						<input class="menuButton" type="submit" name="room" value="rooms" />
 					</th>
 					<th>
-						<input class="menuButton" type="submit" name="emp" value="employee edit" />
+						<input class="menuButton" type="submit" name="emp" value="employees" />
 					</th>
 				</tr>
 				<tr>
 					<th>
-						<input class="menuButton" type="submit" name="order" value="order edit" />
+						<input class="menuButton" type="submit" name="order" value="orders" />
 					</th>
 					<th>
-						<input class="menuButton" type="submit" name="lessor" value="lessor edit" />
+						<input class="menuButton" type="submit" name="lessor" value="lessors" />
 					</th>
 					<th>
-						<input class="menuButton" type="submit" name="artist" value="artist edit" />
+						<input class="menuButton" type="submit" name="artist" value="artists" />
 					</th>
 				</tr>
 			</table>
@@ -48,9 +48,9 @@
 function outputValues($table, $db) {
 	$query = "SELECT * FROM " . $table;
 	$result = mysql_query($query, $db);
-	$html = "";
+	$html = "<center><table class=bordered>";
 	while ($data = mysql_fetch_array($result, MYSQL_NUM)) {
-		$html .= "<table class=bordered><tr class=bordered>";
+		$html .= "<tr class=bordered>";
 		foreach ($data as $key => $value) {
 			if (($table == "zamestnanec") && ($_SESSION['permission'] == 0) && ($key == 4 || $key == 7 || $key == 8)) {
 				$html .= "<th class=bordered>********</th>";
@@ -58,18 +58,39 @@ function outputValues($table, $db) {
 			}
 			$html .= "<th class=bordered>" . $value . "</th>";
 		}
+		if ($table == "mistnost") {
+			$html .= "<th class=bordered><button type='button' onclick='showRoomStuff(".$data[0].")'>equipment</button></th>";
+		}
 		if ((($table == "expozice") || ($table == "mistnost") || ($table == "zamestnanec")) && $_SESSION['permission'] == 0) {
 			continue;
 		}
-		$html .= "<th class=bordered><button type='button' onclick='deleteRow(\\\"".$table.":".$data[0]."\\\")'>Delete</button></tr></table>";
+		$html .= "<th class=bordered><button type='button' onclick='deleteRow(\\\"".$table.":".$data[0]."\\\")'>Delete</button></th>";
 	}
+	$html .= "</table>";
 	if ((($table == "expozice") || ($table == "mistnost") || ($table == "zamestnanec")) && $_SESSION['permission'] == 0) {
 		echo "<script>var div = document.getElementById('result'); div.innerHTML = \"" . $html . "\";</script>";
 		return;
 	}
-	$html .= "<button type='button' onclick='addRow(\\\"".$table."\\\")'>Add</button>";
+	$html .= "<button type='button' onclick='addRow(\\\"".$table."\\\")'>Add</button></center>";
 	echo "<script>var div = document.getElementById('result'); div.innerHTML = \"" . $html . "\";</script>";
 }
+
+function showRoomStuff($db) {
+	$query = "SELECT * FROM  `vybaveni_mistnosti` WHERE id_mistnosti=" . $_SESSION['idMistnosti'];
+	$result = mysql_query($query);
+	$html = "<center><table class=bordered>";
+	while ($data = mysql_fetch_array($result, MYSQL_NUM)) {
+		$html .= "<tr class=bordered>";
+		foreach ($data as $value) {
+			$html .= "<th class=bordered>" . $value . "</th>";
+		}
+		$html .= "<th class=bordered><button type='button' onclick='deleteRow(\\\"vybaveni_mistnosti:".$data[0].":".$_SESSION['idMistnosti']."\\\")'>Delete</button></tr>";
+	}
+	$html .= "</table>";
+	$html .= "<button type='button' onclick='refresh(\\\"mistnost\\\")'>Back</button>";
+	$html .= "<button type='button' onclick='addRow(\\\"vybaveni_mistnosti\\\")'>Add</button></center>";
+	echo "<script>var div = document.getElementById('result'); div.innerHTML = \"" . $html . "\";</script>";
+} 
 
 if (!isset($_SESSION)) {
 	session_start();
@@ -129,7 +150,12 @@ function deleteRow(tableId) {
 		})
 		.done(function () {
 			alert("Success!");
-			refresh(array[0]);
+			if (array[0] == "vybaveni_mistnosti") {
+				showRoomStuff(array[2]);
+			}
+			else {
+				refresh(array[0]);
+			}
 		});
 	}
 }
@@ -139,6 +165,17 @@ function addRow(table) {
 		type: "POST",
 		url: "./tableOutput.php",
 		data: {addRow: table}
+	})
+	.done(function (data) {
+		document.getElementById('result').innerHTML = data;
+	})
+}
+
+function showRoomStuff(roomId) {
+	$.ajax({
+		type: "POST",
+		url: "./roomEquipment.php",
+		data: {showRoomStuff: roomId}
 	})
 	.done(function (data) {
 		document.getElementById('result').innerHTML = data;

@@ -5,9 +5,9 @@ include 'dbInit.php';
 function outputValues($table, $db) {
 	$query = "SELECT * FROM " . $table;
 	$result = mysql_query($query, $db);
-	$html = "";
+	$html = "<center><table class=bordered>";
 	while ($data = mysql_fetch_array($result, MYSQL_NUM)) {
-		$html .= "<table class=bordered><tr class=bordered>";
+		$html .= "<tr class=bordered>";
 		foreach ($data as $key => $value) {
 			if (($table == "zamestnanec") && ($_SESSION['permission'] == 0) && ($key == 4 || $key == 7 || $key == 8)) {
 				$html .= "<th class=bordered>********</th>";
@@ -18,13 +18,17 @@ function outputValues($table, $db) {
 		if ((($table == "objednavka") || ($table == "pronajimatel") || ($table == "umelec")) && $_SESSION['permission'] == 0) {
 			continue;
 		}
-		$html .= "<th class=bordered><button type='button' onclick='deleteRow(\"".$table.":".$data[0]."\")'>Delete</button></tr></table>";
+		if ($table == "mistnost") {
+			$html .= "<th class=bordered><button type='button' onclick='showRoomStuff(".$data[0].")'>equipment</button></th>";
+		}
+		$html .= "<th class=bordered><button type='button' onclick='deleteRow(\"".$table.":".$data[0]."\")'>Delete</button></tr>";
 	}
+	$html .= "</table>";
 	if ((($table == "objednavka") || ($table == "pronajimatel") || ($table == "umelec")) && $_SESSION['permission'] == 0) {
 		echo "<script>var div = document.getElementById('result'); div.innerHTML = \"" . $html . "\";</script>";
 		return;
 	}
-	$html .= "<button type='button' onclick='addRow(\"".$table."\")'>Add</button>";
+	$html .= "<button type='button' onclick='addRow(\"".$table."\")'>Add</button></center>";
 	return $html;
 }
 
@@ -181,6 +185,23 @@ function addRowEmployee() {
 		</div>';
 }
 
+function addRowEquipment() {
+	return '<div class="addForm">
+			<form method="POST">
+				<input type="hidden" name="equipment" value="submit" />
+				<br>
+				<label class="formLabel">Typ: </label>
+				<center><input class="formInput" type="text" name="typ"></center>
+				<br>
+				<label class="formLabel">Pocet: </label>
+				<center><input class="formInput" type="text" name="pocet"></center>
+				<br>
+				<input type="submit" class="formButton" value="add" />
+				<button class="backFormButton" type="button" onclick="showRoomStuff(\''.$_SESSION['idMistnosti'].'\')">Back</button>
+			</form>
+		</div>';
+}
+
 if (!isset($_SESSION)) {
 	session_start();
 }
@@ -207,6 +228,9 @@ if (isset($_POST['addRow'])) {
 			break;
 		case "zamestnanec":
 			echo addRowEmployee();
+			break;
+		case "vybaveni_mistnosti":
+			echo addRowEquipment();
 			break;
 	}
 }
