@@ -1,99 +1,89 @@
 <?php
 
+function error($table) {
+	echo "<script>alert('Please fill every field');
+	$.ajax({
+		type: \"POST\",
+		url: \"./tableOutput.php\",
+		data: {addRow: '".$table."'}
+	})
+	.done(function (data) {
+		document.getElementById('result').innerHTML = data;
+	});</script>";
+}
+
+
 if (!isset($_SESSION)) {
 	session_start();
 }
 
 if (isset($_POST['exposition'])) {
-	if (isset($_POST['typ']) and isset($_POST['umelec']) and isset($_POST['od']) and isset($_POST['do']) and isset($_POST['idZam'])) {
+	if ($_POST['typ'] != "" and $_POST['umelec'] != "" and $_POST['od'] != "" and $_POST['do'] != "" and $_POST['idZam'] != "") {
 		$query = "INSERT INTO `xhaisv00`.`expozice` (`id_expozice`, `typ`, `umelec`, `od`, `do`, `id_zamestnance`) VALUES (NULL, '".$_POST['typ']."', '".$_POST['umelec']."', '".$_POST['od']."', '".$_POST['do']."', '".$_POST['idZam']."');";
 		if (mysql_query($query)) {
 			echo "<script>alert('Success!');</script>";
 			outputValues('expozice', $db);
-			unset($_POST['typ']);
-			unset($_POST['umelec']);
-			unset($_POST['od']);
-			unset($_POST['do']);
-			unset($_POST['idZam']);
 		}
 	}
 	else {
-		echo "<script>alert('Please fill every field')</script>";
+		error("expozice");
 	}
 }
 
 if (isset($_POST['room1'])) {
-	if (isset($_POST['typExp']) and isset($_POST['plocha']) and isset($_POST['cena']) and isset($_POST['tvar']) and isset($_POST['idZam'])) {
+	if ($_POST['typExp'] != "" and $_POST['plocha'] != "" and $_POST['cena'] != "" and $_POST['tvar'] != "" and $_POST['idZam'] != "") {
 		$query = "INSERT INTO `xhaisv00`.`mistnost` (`id_mistnost`, `typ_exp`, `plocha`, `cena`, `tvar`, `id_zamestnance`) VALUES (NULL, '".$_POST['typExp']."', '".$_POST['plocha']."', '".$_POST['cena']."', '".$_POST['tvar']."', '".$_POST['idZam']."');";
 		if (mysql_query($query)) {
 			echo "<script>alert('Success!');</script>";
 			outputValues('mistnost', $db);
-			unset($_POST['typExp']);
-			unset($_POST['plocha']);
-			unset($_POST['cena']);
-			unset($_POST['tvar']);
-			unset($_POST['idZam']);
 		}
 	}
 	else {
-		echo "<script>alert('Please fill every field')</script>";
+		error("mistnost");
 	}
 }
 
 if (isset($_POST['order1'])) {
-	if (isset($_POST['odOrd']) and isset($_POST['doOrd']) and isset($_POST['poplatek']) and isset($_POST['idPron']) and isset($_POST['idExp']) and isset($_POST['idZam'])) {
+	if ($_POST['odOrd'] != "" and $_POST['doOrd'] != "" and $_POST['poplatek'] != "" and $_POST['idPron'] != "" and $_POST['idExp'] != "" and $_POST['idZam'] != "") {
 		$query = "INSERT INTO `xhaisv00`.`objednavka` (`id_objednavka`, `od`, `do`, `poplatek`, `id_pronajimatele`, `id_expozice`, `id_zamestnance`) VALUES (NULL, '".$_POST['odOrd']."', '".$_POST['doOrd']."', '".$_POST['poplatek']."', '".$_POST['idPron']."', '".$_POST['idExp']."', '".$_POST['idZam']."');";
 		if (mysql_query($query)) {
 			echo "<script>alert('Success!');</script>";
 			outputValues('objednavka', $db);
-			unset($_POST['odOrd']);
-			unset($_POST['doOrd']);
-			unset($_POST['poplatek']);
-			unset($_POST['idPron']);
-			unset($_POST['idExp']);
-			unset($_POST['idZam']);
 		}
 	}
 	else {
-		echo "<script>alert('Please fill every field')</script>";
+		error("objednavka");
 	}
 }
 
 if (isset($_POST['lessor1'])) {
-	if (isset($_POST['nazev']) and isset($_POST['kontakt']) and isset($_POST['poplatek'])) {
+	if ($_POST['nazev'] != "" and $_POST['kontakt'] != "" and $_POST['poplatek'] != "") {
 		$query = "INSERT INTO `xhaisv00`.`pronajimatel` (`id_pronajimatel`, `nazev`, `kontakt`, `poplatek`) VALUES (NULL, '".$_POST['nazev']."', '".$_POST['kontakt']."', '".$_POST['poplatek']."');";
 		if (mysql_query($query)) {
 			echo "<script>alert('Success!');</script>";
 			outputValues('pronajimatel', $db);
-			unset($_POST['nazev']);
-			unset($_POST['kontakt']);
-			unset($_POST['poplatek']);
 		}
 	}
 	else {
-		echo "<script>alert('Please fill every field')</script>";
+		error("pronajimatel");
 	}
 }
 
 if (isset($_POST['artist1'])) {
-	if (isset($_POST['jmeno']) and isset($_POST['prijmeni']) and isset($_POST['specializace']) and isset($_POST['idZam'])) {
+	if ($_POST['jmeno'] != "" and $_POST['prijmeni'] != "" and $_POST['specializace'] != "" and $_POST['idZam'] != "") {
 		$query = "INSERT INTO `xhaisv00`.`umelec` (`id_umelec`, `jmeno`, `prijmeni`, `specializace`, `id_zamestnance`) VALUES (NULL, '".$_POST['jmeno']."', '".$_POST['prijmeni']."', '".$_POST['specializace']."', '".$_POST['idZam']."');";
 		if (mysql_query($query)) {
 			echo "<script>alert('Success!');</script>";
 			outputValues('umelec', $db);
-			unset($_POST['jmeno']);
-			unset($_POST['prijmeni']);
-			unset($_POST['specializace']);
-			unset($_POST['idZam']);
 		}
 	}
 	else {
-		echo "<script>alert('Please fill every field')</script>";
+		error("umelec");
 	}
 }
 
 if (isset($_POST['employee1'])) {
-	if (isset($_POST['jmeno']) and isset($_POST['prijmeni']) and isset($_POST['datumNar']) and isset($_POST['prava']) and isset($_POST['rodneC']) and isset($_POST['plat'])) {
+	if ($_POST['jmeno'] != "" and $_POST['prijmeni'] != "" and $_POST['datumNar'] != "" and $_POST['prava'] != "" and $_POST['rodneC'] != "" and $_POST['plat'] != "") {
 		$length = strlen($_POST['prijmeni']);
 		$login = "x";
 		if ($length >= 5) {
@@ -122,32 +112,32 @@ if (isset($_POST['employee1'])) {
 		if (mysql_query($query)) {
 			echo "<script>alert('Success!');</script>";
 			outputValues('zamestnanec', $db);
-			unset($_POST['jmeno']);
-			unset($_POST['prijmeni']);
-			unset($_POST['datumNar']);
-			unset($_POST['prava']);
-			unset($_POST['rodneC']);
-			unset($_POST['plat']);
 		}
 		else {
-			echo "<script>alert('Please fill every field')</script>";
+			error("zamestnanec");
 		}
 	}
 }
 
 if (isset($_POST['equipment'])) {
-	if (isset($_POST['typ']) and isset($_POST['pocet'])) {
+	if ($_POST['typ'] != "" and $_POST['pocet'] != "") {
 		$query = "INSERT INTO `xhaisv00`.`vybaveni_mistnosti` (`id_vybaveni_mistnosti`, `typ`, `pocet`, `id_mistnosti`) VALUES (NULL, '".$_POST['typ']."', '".$_POST['pocet']."', '".$_SESSION['idMistnosti']."');";
 		echo "<script>console.log(\"".$query."\");</script>";
 		if (mysql_query($query)) {
 			echo "<script>alert('Success!');</script>";
 			showRoomStuff($db);
-			unset($_POST['typ']);
-			unset($_POST['pocet']);
 		}
 	}
 	else {
-		echo "<script>alert('Please fill every field')</script>";
+		echo "<script>alert('Please fill every field');
+		$.ajax({
+		type: \"POST\",
+		url: \"./roomEquipment.php\",
+		data: {showRoomStuff: '".$_SESSION['idMistnosti']."'}
+		})
+		.done(function (data) {
+			document.getElementById('result').innerHTML = data;
+		})</script>";
 	}
 }
 
