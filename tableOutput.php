@@ -40,22 +40,22 @@ function addRowExp() {
 			<form method="POST">
 				<input type="hidden" name="exposition" value="submit" />
 				<br>
-				<label class="formLabel">Typ: </label>
+				<label class="formLabel">Type: </label>
 				<center><input class="formInput" type="text" name="typ"></center>
 				<br>
-				<label class="formLabel">Umelec: </label>
+				<label class="formLabel">Artist: </label>
 				<center><input class="formInput" type="text" name="umelec"></center>
 				<br>
-				<label class="formLabel">Datum rezervace (rrrr-mm-dd): </label>
+				<label class="formLabel">Reservation date (yyyy-mm-dd): </label>
 				<center><input class="formInput" type="text" name="od"></center>
 				<br>
-				<label class="formLabel">Datum expirace rezervace (rrrr-mm-dd): </label>
+				<label class="formLabel">Expiration date (yyyy-mm-dd): </label>
 				<center><input class="formInput" type="text" name="do"></center>
 				<br>
-				<label class="formLabel">Id odpovedneho zamestnance: </label>
+				<label class="formLabel">Employee id: </label>
 				<center><input class="formInput" type="text" name="idZam"></center>
 				<br>
-				<input type="submit" class="formButton" value="add" />
+				<input type="submit" class="formButton" value="Add" />
 				<button class="backFormButton" type="button" onclick="refresh(\'expozice\')">Back</button>
 			</form>
 		</div>';
@@ -66,22 +66,22 @@ function addRowRoom() {
 			<form method="POST">
 				<input type="hidden" name="room1" value="submit" />
 				<br>
-				<label class="formLabel">Typ expozice: </label>
+				<label class="formLabel">Exposition type: </label>
 				<center><input class="formInput" type="text" name="typExp"></center>
 				<br>
-				<label class="formLabel">Plocha: </label>
+				<label class="formLabel">Area: </label>
 				<center><input class="formInput" type="text" name="plocha"></center>
 				<br>
-				<label class="formLabel">Cena: </label>
+				<label class="formLabel">Prize: </label>
 				<center><input class="formInput" type="text" name="cena"></center>
 				<br>
-				<label class="formLabel">Tvar: </label>
+				<label class="formLabel">Shape: </label>
 				<center><input class="formInput" type="text" name="tvar"></center>
 				<br>
-				<label class="formLabel">Id odpovedneho zamestnance: </label>
+				<label class="formLabel">Employee id: </label>
 				<center><input class="formInput" type="text" name="idZam"></center>
 				<br>
-				<input type="submit" class="formButton" value="add" />
+				<input type="submit" class="formButton" value="Add" />
 				<button class="backFormButton" type="button" onclick="refresh(\'mistnost\')">Back</button>
 			</form>
 		</div>';
@@ -92,25 +92,25 @@ function addRowOrder() {
 			<form method="POST">
 				<input type="hidden" name="order1" value="submit" />
 				<br>
-				<label class="formLabel">Od (rrrr-mm-dd): </label>
+				<label class="formLabel">From (yyyy-mm-dd): </label>
 				<center><input class="formInput" type="text" name="odOrd"></center>
 				<br>
-				<label class="formLabel">Do (rrrr-mm-dd): </label>
+				<label class="formLabel">To (yyyy-mm-dd): </label>
 				<center><input class="formInput" type="text" name="doOrd"></center>
 				<br>
-				<label class="formLabel">Poplatek: </label>
+				<label class="formLabel">Fee: </label>
 				<center><input class="formInput" type="text" name="poplatek"></center>
 				<br>
-				<label class="formLabel">Id pronajimatele: </label>
+				<label class="formLabel">Lessor id: </label>
 				<center><input class="formInput" type="text" name="idPron"></center>
 				<br>
-				<label class="formLabel">Id expozice: </label>
+				<label class="formLabel">Exposition id: </label>
 				<center><input class="formInput" type="text" name="idExp"></center>
 				<br>
-				<label class="formLabel">Id odpovedneho zamestnance: </label>
+				<label class="formLabel">Employee id: </label>
 				<center><input class="formInput" type="text" name="idZam"></center>
 				<br>
-				<input type="submit" class="formButton" value="add" />
+				<input type="submit" class="formButton" value="Add" />
 				<button class="backFormButton" type="button" onclick="refresh(\'objednavka\')">Back</button>
 			</form>
 		</div>';
@@ -121,16 +121,16 @@ function addRowLessor() {
 			<form method="POST">
 				<input type="hidden" name="lessor1" value="submit" />
 				<br>
-				<label class="formLabel">Nazev: </label>
+				<label class="formLabel">Name: </label>
 				<center><input class="formInput" type="text" name="nazev"></center>
 				<br>
-				<label class="formLabel">Kontakt: </label>
+				<label class="formLabel">Contact: </label>
 				<center><input class="formInput" type="text" name="kontakt"></center>
 				<br>
-				<label class="formLabel">Poplatek: </label>
+				<label class="formLabel">Fee: </label>
 				<center><input class="formInput" type="text" name="poplatek"></center>
 				<br>
-				<input type="submit" class="formButton" value="add" />
+				<input type="submit" class="formButton" value="Add" />
 				<button class="backFormButton" type="button" onclick="refresh(\'pronajimatel\')">Back</button>
 			</form>
 		</div>';
@@ -141,19 +141,19 @@ function addRowArtist() {
 			<form method="POST">
 				<input type="hidden" name="artist1" value="submit" />
 				<br>
-				<label class="formLabel">Jmeno: </label>
+				<label class="formLabel">Name: </label>
 				<center><input class="formInput" type="text" name="jmeno"></center>
 				<br>
-				<label class="formLabel">Prijmeni: </label>
+				<label class="formLabel">Surname: </label>
 				<center><input class="formInput" type="text" name="prijmeni"></center>
 				<br>
-				<label class="formLabel">Specializace: </label>
+				<label class="formLabel">Specialization: </label>
 				<center><input class="formInput" type="text" name="specializace"></center>
 				<br>
-				<label class="formLabel">Id odpovedneho zamestnance: </label>
+				<label class="formLabel">Employee id: </label>
 				<center><input class="formInput" type="text" name="idZam"></center>
 				<br>
-				<input type="submit" class="formButton" value="add" />
+				<input type="submit" class="formButton" value="Add" />
 				<button class="backFormButton" type="button" onclick="refresh(\'umelec\')">Back</button>
 			</form>
 		</div>';
@@ -164,25 +164,25 @@ function addRowEmployee() {
 			<form method="POST">
 				<input type="hidden" name="employee1" value="submit" />
 				<br>
-				<label class="formLabel">Jmeno: </label>
+				<label class="formLabel">Name: </label>
 				<center><input class="formInput" type="text" name="jmeno"></center>
 				<br>
-				<label class="formLabel">Prijmeni: </label>
+				<label class="formLabel">Surname: </label>
 				<center><input class="formInput" type="text" name="prijmeni"></center>
 				<br>
-				<label class="formLabel">Datum narozeni (rrrr-mm-dd): </label>
+				<label class="formLabel">Date of birth (yyyy-mm-dd): </label>
 				<center><input class="formInput" type="text" name="datumNar"></center>
 				<br>
-				<label class="formLabel">Prava (1 = admin, 0 = zamestnanec): </label>
+				<label class="formLabel">Permissions (1 = admin, 0 = employee): </label>
 				<center><input class="formInput" type="text" name="prava"></center>
 				<br>
-				<label class="formLabel">Rodne cislo: </label>
+				<label class="formLabel">Birth number: </label>
 				<center><input class="formInput" type="text" name="rodneC"></center>
 				<br>
-				<label class="formLabel">Plat: </label>
+				<label class="formLabel">Salary: </label>
 				<center><input class="formInput" type="text" name="plat"></center>
 				<br>
-				<input type="submit" class="formButton" value="add" />
+				<input type="submit" class="formButton" value="Add" />
 				<button class="backFormButton" type="button" onclick="refresh(\'zamestnanec\')">Back</button>
 			</form>
 		</div>';
@@ -193,13 +193,13 @@ function addRowEquipment() {
 			<form method="POST">
 				<input type="hidden" name="equipment" value="submit" />
 				<br>
-				<label class="formLabel">Typ: </label>
+				<label class="formLabel">Type: </label>
 				<center><input class="formInput" type="text" name="typ"></center>
 				<br>
-				<label class="formLabel">Pocet: </label>
+				<label class="formLabel">Count: </label>
 				<center><input class="formInput" type="text" name="pocet"></center>
 				<br>
-				<input type="submit" class="formButton" value="add" />
+				<input type="submit" class="formButton" value="Add" />
 				<button class="backFormButton" type="button" onclick="showRoomStuff(\''.$_SESSION['idMistnosti'].'\')">Back</button>
 			</form>
 		</div>';
