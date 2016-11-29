@@ -48,7 +48,33 @@
 function outputValues($table, $db) {
 	$query = "SELECT * FROM " . $table;
 	$result = mysql_query($query, $db);
-	$html = "<center><table class=bordered>";
+	$html = "<center><table class=bordered><tr class='bordered'><th class='bordered'>id</th>";
+	switch ($table) {
+		case "expozice":
+			$html .= "<th class='bordered'>Type</th><th class='bordered'>Artist</th><th class='bordered'>From</th><th class='bordered'>To</th><th class='bordered'>Employee id</th><th class='bordered'></th><th class='bordered'></th>";
+			break;
+		case "mistnost":
+			$html .= "<th class='bordered'>Type</th><th class='bordered'>Area</th><th class='bordered'>Prize</th><th class='bordered'>Shape</th><th class='bordered'>Employee id</th><th class='bordered'></th><th class='bordered'></th><th class='bordered'></th>";
+			break;
+		case "objednavka":
+			$html .= "<th class='bordered'>From</th><th class='bordered'>To</th><th class='bordered'>Fee</th><th class='bordered'>Lessor id</th><th class='bordered'>Room id</th><th class='bordered'>Employee id</th><th class='bordered'></th><th class='bordered'></th>";
+			break;
+		case "pronajimatel":
+			$html .= "<th class='bordered'>Name</th><th class='bordered'>Contact</th><th class='bordered'>Fee</th><th class='bordered'></th><th class='bordered'></th>";
+			break;
+		case "umelec":
+			$html .= "<th class='bordered'>Name</th><th class='bordered'>Surname</th><th class='bordered'>Specialization</th><th class='bordered'>Employee id</th><th class='bordered'></th><th class='bordered'></th>";
+			break;
+		case "zamestnanec":
+			if ($_SESSION['permission'] == 0) {
+				$html .= "<th class='bordered'>Name</th><th class='bordered'>Surname</th><th class='bordered'>Login</th><th class='bordered'>Date of birth</th><th class='bordered'>Permissions</th><th class='bordered'></th><th class='bordered'></th>";
+			}
+			else {
+				$html .= "<th class='bordered'>Name</th><th class='bordered'>Surname</th><th class='bordered'>Login</th><th class='bordered'>Password</th><th class='bordered'>Date of birth</th><th class='bordered'>Permissions</th><th class='bordered'>Birth number</th><th class='bordered'>Salary</th><th class='bordered'></th><th class='bordered'></th>";
+			}
+			break;
+	}
+	$html .= "</tr>";
 	while ($data = mysql_fetch_array($result, MYSQL_NUM)) {
 		$html .= "<tr class=bordered>";
 		foreach ($data as $key => $value) {
@@ -81,7 +107,7 @@ function outputValues($table, $db) {
 function showRoomStuff($db) {
 	$query = "SELECT * FROM  `vybaveni_mistnosti` WHERE id_mistnosti=" . $_SESSION['idMistnosti'];
 	$result = mysql_query($query);
-	$html = "<center><table class=bordered>";
+	$html = "<center><table class=bordered><tr class='bordered'><th class='bordered'>id</th><th class='bordered'>Type</th><th class='bordered'>Count</th><th class='bordered'>Room id</th><th class='bordered'></th><th class='bordered'></th></tr>";
 	while ($data = mysql_fetch_array($result, MYSQL_NUM)) {
 		$html .= "<tr class=bordered>";
 		foreach ($data as $value) {
@@ -140,6 +166,8 @@ if (isset($_POST['logout'])) {
 }
 
 include 'addRowFunctions.php';
+include 'editRowFunctions.php';
+include 'restartForms.php';
 
 ?>
 

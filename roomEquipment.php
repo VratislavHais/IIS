@@ -10,7 +10,7 @@ if (isset($_POST['showRoomStuff'])) {
 	$_SESSION['idMistnosti'] = $_POST['showRoomStuff'];
 	$query = "SELECT * FROM  `vybaveni_mistnosti` WHERE id_mistnosti=" . $_POST['showRoomStuff'];
 	$result = mysql_query($query);
-	$html = "<center><table class=bordered>";
+	$html = "<center><table class=bordered><tr class='bordered'><th class='bordered'>id</th><th class='bordered'>Type</th><th class='bordered'>Count</th><th class='bordered'>Room id</th><th class='bordered'></th><th class='bordered'></th></tr>";
 	while ($data = mysql_fetch_array($result, MYSQL_NUM)) {
 		$html .= "<tr class=bordered>";
 		foreach ($data as $value) {

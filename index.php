@@ -14,6 +14,7 @@ if (isset($_POST['login']) and isset($_POST['passwd']) and $_POST != "") {
 	if (!strcmp($data['heslo'], $_POST['passwd'])) {
 		$_SESSION['permission'] = $data['prava'];	// 2 - jedna se o pronajimatele, 1 - jedna se o admina, 0 - jedna se o zamestnance
 		$_SESSION['lastActivity'] = time();
+		$_SESSION['id'] = $data['id_zamestnanec'];
 		header("Location: ./menu.php");
 	}
 	else {

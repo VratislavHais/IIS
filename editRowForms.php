@@ -2,6 +2,10 @@
 
 include 'dbInit.php';
 
+if (!isset($_SESSION)) {
+	session_start();
+}
+
 function editRowExp($id) {
 	$query = "SELECT * FROM `expozice` WHERE id_expozice=" . $id;
 	$result = mysql_query($query);
@@ -209,24 +213,31 @@ if (isset($_POST['editRow'])) {
 	switch ($array[0]) {
 		case "expozice":
 			echo editRowExp($array[1]);
+			$_SESSION['editId'] = $array[1];
 			break;
 		case "mistnost":
 			echo editRowRoom($array[1]);
+			$_SESSION['editId'] = $array[1];
 			break;
 		case "objednavka":
 			echo editRowOrder($array[1]);
+			$_SESSION['editId'] = $array[1];
 			break;
 		case "pronajimatel":
 			echo editRowLessor($array[1]);
+			$_SESSION['editId'] = $array[1];
 			break;
 		case "umelec":
 			echo editRowArtist($array[1]);
+			$_SESSION['editId'] = $array[1];
 			break;
 		case "zamestnanec":
 			echo editRowEmployee($array[1]);
+			$_SESSION['editId'] = $array[1];
 			break;
 		case "vybaveni_mistnosti":
 			echo editRowEquipment($array[1]);
+			$_SESSION['editId'] = $array[1];
 			break;
 	}
 }
