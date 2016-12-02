@@ -37,7 +37,7 @@ function dates($from, $to) {
 
 function idInDb($id, $table, $db) {
 	$query = "SELECT * FROM ".$table." WHERE id_".$table."=".$id;
-	if (mysql_query($query)) {
+	if (mysql_fetch_array(mysql_query($query))) {
 		return true;
 	}
 	else {
@@ -135,7 +135,7 @@ if (isset($_POST['artist1'])) {
 
 if (isset($_POST['employee1'])) {
 	if ($_POST['jmeno'] != "" and $_POST['prijmeni'] != "" and $_POST['datumNar'] != "" and $_POST['prava'] != "" and $_POST['rodneC'] != "" and $_POST['plat'] != "" and
-		dateCheck($_POST['datumNar']) and ($_POST['prava'] == 0 || $_POST['prava'] == 1) and (($POST['rodneC'] % 11) == 0) and ctype_digit($_POST['plat'])) {
+		dateCheck($_POST['datumNar']) and ($_POST['prava'] == 0 || $_POST['prava'] == 1) and (($_POST['rodneC'] % 11) == 0) and ctype_digit($_POST['plat'])) {
 		$length = strlen($_POST['prijmeni']);
 		$login = "x";
 		if ($length >= 5) {

@@ -14,7 +14,7 @@ function outputValues($table, $db) {
 			$html .= "<th class='bordered'>Type</th><th class='bordered'>Area</th><th class='bordered'>Prize</th><th class='bordered'>Shape</th><th class='bordered'>Employee id</th><th class='bordered'></th><th class='bordered'></th><th class='bordered'></th>";
 			break;
 		case "objednavka":
-			$html .= "<th class='bordered'>From</th><th class='bordered'>To</th><th class='bordered'>Fee</th><th class='bordered'>Lessor id</th><th class='bordered'>Room id</th><th class='bordered'>Employee id</th><th class='bordered'></th><th class='bordered'></th>";
+			$html .= "<th class='bordered'>From</th><th class='bordered'>To</th><th class='bordered'>Fee</th><th class='bordered'>Lessor id</th><th class='bordered'>Exposition id</th><th class='bordered'>Employee id</th><th class='bordered'></th><th class='bordered'></th>";
 			break;
 		case "pronajimatel":
 			$html .= "<th class='bordered'>Name</th><th class='bordered'>Contact</th><th class='bordered'>Fee</th><th class='bordered'></th><th class='bordered'></th>";
@@ -57,7 +57,7 @@ function outputValues($table, $db) {
 		echo "<script>var div = document.getElementById('result'); div.innerHTML = \"" . $html . "\";</script>";
 		return;
 	}
-	$html .= "<button type='button' onclick='addRow(\"".$table."\")'>Add</button></center>";
+	$html .= "<button type='button' class='addButton' onclick='addRow(\"".$table."\")'>Add</button></center>";
 	return $html;
 }
 
@@ -177,7 +177,7 @@ function addRowArtist() {
 
 function addRowEmployee() {
 	return '<div class="addForm">
-			<form method="POST">
+			<form method="POST" style="font-size: 20px;">
 				<input type="hidden" name="employee1" value="submit" />
 				<br>
 				<label class="formLabel">Name: </label>
@@ -189,8 +189,9 @@ function addRowEmployee() {
 				<label class="formLabel">Date of birth (yyyy-mm-dd): </label>
 				<center><input class="formInput" type="text" name="datumNar"></center>
 				<br>
-				<label class="formLabel">Permissions (1 = admin, 0 = employee): </label>
-				<center><input class="formInput" type="text" name="prava"></center>
+				<label class="formLabel">Permissions: </label>
+				<center><input type="radio" name="prava" value="1">Admin
+						<input type="radio" name="prava" value="0">Employee</center>
 				<br>
 				<label class="formLabel">Birth number: </label>
 				<center><input class="formInput" type="text" name="rodneC"></center>

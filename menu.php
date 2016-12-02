@@ -57,7 +57,7 @@ function outputValues($table, $db) {
 			$html .= "<th class='bordered'>Type</th><th class='bordered'>Area</th><th class='bordered'>Prize</th><th class='bordered'>Shape</th><th class='bordered'>Employee id</th><th class='bordered'></th><th class='bordered'></th><th class='bordered'></th>";
 			break;
 		case "objednavka":
-			$html .= "<th class='bordered'>From</th><th class='bordered'>To</th><th class='bordered'>Fee</th><th class='bordered'>Lessor id</th><th class='bordered'>Room id</th><th class='bordered'>Employee id</th><th class='bordered'></th><th class='bordered'></th>";
+			$html .= "<th class='bordered'>From</th><th class='bordered'>To</th><th class='bordered'>Fee</th><th class='bordered'>Lessor id</th><th class='bordered'>Exposition id</th><th class='bordered'>Employee id</th><th class='bordered'></th><th class='bordered'></th>";
 			break;
 		case "pronajimatel":
 			$html .= "<th class='bordered'>Name</th><th class='bordered'>Contact</th><th class='bordered'>Fee</th><th class='bordered'></th><th class='bordered'></th>";
@@ -100,7 +100,7 @@ function outputValues($table, $db) {
 		echo "<script>var div = document.getElementById('result'); div.innerHTML = \"" . $html . "\";</script>";
 		return;
 	}
-	$html .= "<button type='button' onclick='addRow(\\\"".$table."\\\")'>Add</button></center>";
+	$html .= "<button type='button' class='addButton' onclick='addRow(\\\"".$table."\\\")'>Add</button></center>";
 	echo "<script>var div = document.getElementById('result'); div.innerHTML = \"" . $html . "\";</script>";
 }
 
@@ -113,12 +113,12 @@ function showRoomStuff($db) {
 		foreach ($data as $value) {
 			$html .= "<th class=bordered>" . $value . "</th>";
 		}
-		$html .= "<th class=bordered><button type='button' onclick='editRow(\\\"vybaveni_mistnosti:".$data[0].":".$_SESSION['idMistnosti']."\\\")'>Edit</button></th>";
+		$html .= "<th class=bordered><button type='button' onclick='editRowForms(\\\"vybaveni_mistnosti:".$data[0].":".$_SESSION['idMistnosti']."\\\")'>Edit</button></th>";
 		$html .= "<th class=bordered><button type='button' onclick='deleteRow(\\\"vybaveni_mistnosti:".$data[0].":".$_SESSION['idMistnosti']."\\\")'>Delete</button></tr>";
 	}
 	$html .= "</table>";
-	$html .= "<button type='button' onclick='refresh(\\\"mistnost\\\")'>Back</button>";
-	$html .= "<button type='button' onclick='addRow(\\\"vybaveni_mistnosti\\\")'>Add</button></center>";
+	$html .= "<button type='button' class='addButton' onclick='refresh(\\\"mistnost\\\")'>Back</button>";
+	$html .= "<button type='button' class='addButton' onclick='addRow(\\\"vybaveni_mistnosti\\\")'>Add</button></center>";
 	echo "<script>var div = document.getElementById('result'); div.innerHTML = \"" . $html . "\";</script>";
 } 
 

@@ -16,12 +16,12 @@ if (isset($_POST['showRoomStuff'])) {
 		foreach ($data as $value) {
 			$html .= "<th class=bordered>" . $value . "</th>";
 		}
-		$html .= "<th class=bordered><button type='button' onclick='editRow(\"vybaveni_mistnosti:".$data[0].":".$_SESSION['idMistnosti']."\")'>Edit</button></th>";
+		$html .= "<th class=bordered><button type='button' onclick='editRowForms(\"vybaveni_mistnosti:".$data[0].":".$_SESSION['idMistnosti']."\")'>Edit</button></th>";
 		$html .= "<th class=bordered><button type='button' onclick='deleteRow(\"vybaveni_mistnosti:".$data[0].":".$_SESSION['idMistnosti']."\")'>Delete</button></tr>";
 	}
 	$html .= "</table>";
-	$html .= "<button type='button' onclick='refresh(\"mistnost\")'>Back</button>";
-	$html .= "<button type='button' onclick='addRow(\"vybaveni_mistnosti\")'>Add</button></center>";
+	$html .= "<button type='button' class='addButton' onclick='refresh(\"mistnost\")'>Back</button>";
+	$html .= "<button type='button' class='addButton' onclick='addRow(\"vybaveni_mistnosti\")'>Add</button></center>";
 	echo $html;
 }
 

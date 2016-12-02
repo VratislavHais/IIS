@@ -118,7 +118,7 @@ function formRowArtist($button, $name) {
 
 function formRowEmployee($button, $name) {
 	return '<div class="addForm">
-			<form method="POST">
+			<form method="POST" style="font-size: 20px;">
 				<input type="hidden" name="employee'.$name.'" value="submit" />
 				<br>
 				<label class="formLabel">Name: </label>
@@ -130,8 +130,9 @@ function formRowEmployee($button, $name) {
 				<label class="formLabel">Date of birth (yyyy-mm-dd): </label>
 				<center><input class="formInput" type="text" name="datumNar" value="'.$_SESSION['datumNar'].'"></center>
 				<br>
-				<label class="formLabel">Permissions (1 = admin, 0 = employee): </label>
-				<center><input class="formInput" type="text" name="prava" value="'.$_SESSION['prava'].'"></center>
+				<label class="formLabel">Permissions: </label>
+				<center><input type="radio" name="prava" value="1">Admin
+						<input type="radio" name="prava" value="0">Employee</center>
 				<br>
 				<label class="formLabel">Birth number: </label>
 				<center><input class="formInput" type="text" name="rodneC" value="'.$_SESSION['rodneC'].'"></center>
