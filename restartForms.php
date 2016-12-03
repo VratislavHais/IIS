@@ -117,6 +117,14 @@ function formRowArtist($button, $name) {
 }
 
 function formRowEmployee($button, $name) {
+	if ($_SESSION['prava'] == 1) {
+		$admin = '<input type="radio" name="prava" value="1" checked>Admin
+						<input type="radio" name="prava" value="0">Employee</center>';
+	}
+	else {
+		$admin = '<input type="radio" name="prava" value="1">Admin
+						<input type="radio" name="prava" value="0" checked>Employee</center>';
+	}
 	return '<div class="addForm">
 			<form method="POST" style="font-size: 20px;">
 				<input type="hidden" name="employee'.$name.'" value="submit" />
@@ -131,8 +139,7 @@ function formRowEmployee($button, $name) {
 				<center><input class="formInput" type="text" name="datumNar" value="'.$_SESSION['datumNar'].'"></center>
 				<br>
 				<label class="formLabel">Permissions: </label>
-				<center><input type="radio" name="prava" value="1">Admin
-						<input type="radio" name="prava" value="0">Employee</center>
+				<center>' . $admin . '
 				<br>
 				<label class="formLabel">Birth number: </label>
 				<center><input class="formInput" type="text" name="rodneC" value="'.$_SESSION['rodneC'].'"></center>

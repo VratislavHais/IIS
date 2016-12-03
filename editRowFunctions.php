@@ -85,8 +85,8 @@ if (isset($_POST['artistEdit'])) {
 }
 
 if (isset($_POST['employeeEdit'])) {
-	if ($_POST['jmeno'] != "" and $_POST['prijmeni'] != "" and $_POST['datumNar'] != "" and $_POST['prava'] != "" and $_POST['rodneC'] != "" and $_POST['plat'] != "" and
-		dateCheck($_POST['datumNar']) and ($_POST['prava'] == 0 || $_POST['prava'] == 1) and (($_POST['rodneC'] % 11) == 0) and ctype_digit($_POST['plat'])) {
+	if ($_POST['jmeno'] != "" and $_POST['prijmeni'] != "" and $_POST['datumNar'] != "" and $_POST['rodneC'] != "" and $_POST['plat'] != "" and
+		dateCheck($_POST['datumNar']) and (($_POST['rodneC'] % 11) == 0) and ctype_digit($_POST['plat'])) {
 		$query = "UPDATE `zamestnanec` SET `jmeno`='".$_POST['jmeno']."', `prijmeni`='".$_POST['prijmeni']."', `datum_nar`='".$_POST['datumNar']."', `prava`='".$_POST['prava']."', `rod_cislo`='".$_POST['rodneC']."', `plat`='".$_POST['plat']."' WHERE `id_zamestnanec`=".$_SESSION['editId'].";";
 		if (mysql_query($query)) {
 			echo "<script>alert('Success!');</script>";

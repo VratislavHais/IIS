@@ -191,7 +191,7 @@ function addRowEmployee() {
 				<br>
 				<label class="formLabel">Permissions: </label>
 				<center><input type="radio" name="prava" value="1">Admin
-						<input type="radio" name="prava" value="0">Employee</center>
+						<input type="radio" name="prava" value="0" checked>Employee</center>
 				<br>
 				<label class="formLabel">Birth number: </label>
 				<center><input class="formInput" type="text" name="rodneC"></center>

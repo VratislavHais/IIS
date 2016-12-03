@@ -154,8 +154,16 @@ function editRowEmployee($id) {
 	$query = "SELECT * FROM `zamestnanec` WHERE id_zamestnanec=" . $id;
 	$result = mysql_query($query);
 	$data = mysql_fetch_array($result, MYSQL_NUM);
+	if ($data[6] == 1) {
+		$admin = '<input type="radio" name="prava" value="1" checked>Admin
+						<input type="radio" name="prava" value="0">Employee</center>';
+	}
+	else {
+		$admin = '<input type="radio" name="prava" value="1">Admin
+						<input type="radio" name="prava" value="0" checked>Employee</center>';
+	}
 	$html = '<div class="addForm">
-			<form method="POST">
+			<form method="POST" style="font-size: 20px;">
 				<input type="hidden" name="employeeEdit" value="submit" />
 				<br>
 				<label class="formLabel">Name: </label>
@@ -167,8 +175,8 @@ function editRowEmployee($id) {
 				<label class="formLabel">Date of birth (yyyy-mm-dd): </label>
 				<center><input class="formInput" type="text" name="datumNar" value="'.$data[5].'"></center>
 				<br>
-				<label class="formLabel">Permissions (1 = admin, 0 = employee): </label>
-				<center><input class="formInput" type="text" name="prava" value="'.$data[6].'"></center>
+				<label class="formLabel">Permissions: </label>
+				<center>' . $admin . '
 				<br>
 				<label class="formLabel">Birth number: </label>
 				<center><input class="formInput" type="text" name="rodneC" value="'.$data[7].'"></center>

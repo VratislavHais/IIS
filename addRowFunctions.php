@@ -134,8 +134,8 @@ if (isset($_POST['artist1'])) {
 }
 
 if (isset($_POST['employee1'])) {
-	if ($_POST['jmeno'] != "" and $_POST['prijmeni'] != "" and $_POST['datumNar'] != "" and $_POST['prava'] != "" and $_POST['rodneC'] != "" and $_POST['plat'] != "" and
-		dateCheck($_POST['datumNar']) and ($_POST['prava'] == 0 || $_POST['prava'] == 1) and (($_POST['rodneC'] % 11) == 0) and ctype_digit($_POST['plat'])) {
+	if ($_POST['jmeno'] != "" and $_POST['prijmeni'] != "" and $_POST['datumNar'] != "" and $_POST['rodneC'] != "" and $_POST['plat'] != "" and
+		dateCheck($_POST['datumNar']) and (($_POST['rodneC'] % 11) == 0) and ctype_digit($_POST['plat'])) {
 		$length = strlen($_POST['prijmeni']);
 		$login = "x";
 		if ($length >= 5) {
@@ -165,15 +165,15 @@ if (isset($_POST['employee1'])) {
 			echo "<script>alert('Success!');</script>";
 			outputValues('zamestnanec', $db);
 		}
-		else {
-			$_SESSION['jmeno'] = $_POST['jmeno'];
-			$_SESSION['prijmeni'] = $_POST['prijmeni'];
-			$_SESSION['datumNar'] = $_POST['datumNar'];
-			$_SESSION['prava'] = $_POST['prava'];
-			$_SESSION['rodneC'] = $_POST['rodneC'];
-			$_SESSION['plat'] = $_POST['plat'];
-			error("zamestnanec", "Add");
-		}
+	}
+	else {
+		$_SESSION['jmeno'] = $_POST['jmeno'];
+		$_SESSION['prijmeni'] = $_POST['prijmeni'];
+		$_SESSION['datumNar'] = $_POST['datumNar'];
+		$_SESSION['prava'] = $_POST['prava'];
+		$_SESSION['rodneC'] = $_POST['rodneC'];
+		$_SESSION['plat'] = $_POST['plat'];
+		error("zamestnanec", "Add");
 	}
 }
 
