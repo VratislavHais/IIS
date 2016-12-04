@@ -47,7 +47,7 @@ function outputValues($table, $db) {
 			continue;
 		}
 		$html .= "<th class=bordered><button type='button' onclick='editRowForms(\"".$table.":".$data[0]."\")'>Edit</button></th>";
-		if ((($table == "objednavka") || ($table == "pronajimatel") || ($table == "umelec")) && $_SESSION['permission'] == 0) {
+		if ((($table == "expozice") || ($table == "mistnost") || ($table == "zamestnanec")) && $_SESSION['permission'] == 0) {
 			continue;
 		}
 		$html .= "<th class=bordered><button type='button' onclick='deleteRow(\"".$table.":".$data[0]."\")'>Delete</button></tr>";
@@ -111,7 +111,7 @@ function addRowRoom() {
 function addRowOrder() {
 	$date = date("Y-m-d");
 	return '<div class="addForm">
-			<form method="POST">
+			<form method="POST" style="font-size: 20px;">
 				<input type="hidden" name="order1" value="submit" />
 				<br>
 				<label class="formLabel">From (yyyy-mm-dd): </label>
@@ -121,7 +121,8 @@ function addRowOrder() {
 				<center><input class="formInput" type="text" name="doOrd" value="'.$date.'"></center>
 				<br>
 				<label class="formLabel">Fee: </label>
-				<center><input class="formInput" type="text" name="poplatek"></center>
+				<center><input type="radio" name="poplatek" value="yes">yes
+						<input type="radio" name="poplatek" value="no" checked>no</center>
 				<br>
 				<label class="formLabel">Lessor id: </label>
 				<center><input class="formInput" type="text" name="idPron"></center>
@@ -137,7 +138,7 @@ function addRowOrder() {
 
 function addRowLessor() {
 	return '<div class="addForm">
-			<form method="POST">
+			<form method="POST" style="font-size: 20px;">
 				<input type="hidden" name="lessor1" value="submit" />
 				<br>
 				<label class="formLabel">Name: </label>
@@ -147,7 +148,8 @@ function addRowLessor() {
 				<center><input class="formInput" type="text" name="kontakt"></center>
 				<br>
 				<label class="formLabel">Fee: </label>
-				<center><input class="formInput" type="text" name="poplatek"></center>
+				<center><input type="radio" name="poplatek" value="yes">yes
+						<input type="radio" name="poplatek" value="no" checked>no</center>
 				<br>
 				<input type="submit" class="formButton" value="Add" />
 				<button class="backFormButton" type="button" onclick="refresh(\'pronajimatel\')">Back</button>

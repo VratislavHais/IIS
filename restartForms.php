@@ -51,8 +51,16 @@ function formRowRoom($button, $name) {
 }
 
 function formRowOrder($button, $name) {
+	if ($_SESSION['poplatek'] == "yes") {
+		$fee = '<input type="radio" name="poplatek" value="yes" checked>yes
+						<input type="radio" name="poplatek" value="no">no</center>';
+	}
+	else {
+		$fee = '<input type="radio" name="poplatek" value="yes">yes
+						<input type="radio" name="poplatek" value="no" checked>no</center>';
+	}
 	return '<div class="addForm">
-			<form method="POST">
+			<form method="POST" style="font-size: 20px;">
 				<input type="hidden" name="order'.$name.'" value="submit" />
 				<br>
 				<label class="formLabel">From (yyyy-mm-dd): </label>
@@ -62,7 +70,7 @@ function formRowOrder($button, $name) {
 				<center><input class="formInput" type="text" name="doOrd" value="'.$_SESSION['doOrd'].'"></center>
 				<br>
 				<label class="formLabel">Fee: </label>
-				<center><input class="formInput" type="text" name="poplatek" value="'.$_SESSION['poplatek'].'"></center>
+				<center>'.$fee.'
 				<br>
 				<label class="formLabel">Lessor id: </label>
 				<center><input class="formInput" type="text" name="idPron" value="'.$_SESSION['idPron'].'"></center>
@@ -77,8 +85,16 @@ function formRowOrder($button, $name) {
 }
 
 function formRowLessor($button, $name) {
+	if ($_SESSION['poplatek'] == "yes") {
+		$fee = '<input type="radio" name="poplatek" value="yes" checked>yes
+						<input type="radio" name="poplatek" value="no">no</center>';
+	}
+	else {
+		$fee = '<input type="radio" name="poplatek" value="yes">yes
+						<input type="radio" name="poplatek" value="no" checked>no</center>';
+	}
 	return '<div class="addForm">
-			<form method="POST">
+			<form method="POST" style="font-size: 20px;">
 				<input type="hidden" name="lessor'.$name.'" value="submit" />
 				<br>
 				<label class="formLabel">Name: </label>
@@ -88,7 +104,7 @@ function formRowLessor($button, $name) {
 				<center><input class="formInput" type="text" name="kontakt" value="'.$_SESSION['kontakt'].'"></center>
 				<br>
 				<label class="formLabel">Fee: </label>
-				<center><input class="formInput" type="text" name="poplatek" value="'.$_SESSION['poplatek'].'"></center>
+				<center>' .$fee . '
 				<br>
 				<input type="submit" class="formButton" value="'.$button.'" />
 				<button class="backFormButton" type="button" onclick="refresh(\'pronajimatel\')">Back</button>

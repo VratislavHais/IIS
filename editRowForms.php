@@ -70,8 +70,16 @@ function editRowOrder($id) {
 	$query = "SELECT * FROM `objednavka` WHERE id_objednavka=" . $id;
 	$result = mysql_query($query);
 	$data = mysql_fetch_array($result, MYSQL_NUM);
+	if ($data[3] == "yes") {
+		$fee = '<input type="radio" name="poplatek" value="yes" checked>yes
+						<input type="radio" name="poplatek" value="no">no</center>';
+	}
+	else {
+		$fee = '<input type="radio" name="poplatek" value="yes">yes
+						<input type="radio" name="poplatek" value="no" checked>no</center>';
+	}
 	$html = '<div class="addForm">
-			<form method="POST">
+			<form method="POST" style="font-size: 20px;">
 				<input type="hidden" name="orderEdit" value="submit" />
 				<br>
 				<label class="formLabel">From (yyyy-mm-dd): </label>
@@ -81,7 +89,7 @@ function editRowOrder($id) {
 				<center><input class="formInput" type="text" name="doOrd" value="'.$data[2].'"></center>
 				<br>
 				<label class="formLabel">Fee: </label>
-				<center><input class="formInput" type="text" name="poplatek" value="'.$data[3].'"></center>
+				<center>'.$fee.'
 				<br>
 				<label class="formLabel">Lessor id: </label>
 				<center><input class="formInput" type="text" name="idPron" value="'.$data[4].'"></center>
@@ -103,8 +111,16 @@ function editRowLessor($id) {
 	$query = "SELECT * FROM `pronajimatel` WHERE id_pronajimatel=" . $id;
 	$result = mysql_query($query);
 	$data = mysql_fetch_array($result, MYSQL_NUM);
+	if ($data[3] == "yes") {
+		$fee = '<input type="radio" name="poplatek" value="yes" checked>yes
+						<input type="radio" name="poplatek" value="no">no</center>';
+	}
+	else {
+		$fee = '<input type="radio" name="poplatek" value="yes">yes
+						<input type="radio" name="poplatek" value="no" checked>no</center>';
+	}
 	$html = '<div class="addForm">
-			<form method="POST">
+			<form method="POST" style="font-size: 20px;">
 				<input type="hidden" name="lessorEdit" value="submit" />
 				<br>
 				<label class="formLabel">Name: </label>
@@ -114,7 +130,7 @@ function editRowLessor($id) {
 				<center><input class="formInput" type="text" name="kontakt" value="'.$data[2].'"></center>
 				<br>
 				<label class="formLabel">Fee: </label>
-				<center><input class="formInput" type="text" name="poplatek" value="'.$data[3].'"></center>
+				<center>'.$fee.'
 				<br>
 				<input type="submit" class="formButton" value="Edit" />
 				<button class="backFormButton" type="button" onclick="refresh(\'pronajimatel\')">Back</button>

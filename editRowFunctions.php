@@ -35,7 +35,7 @@ if (isset($_POST['roomEdit'])) {
 }
 
 if (isset($_POST['orderEdit'])) {
-	if ($_POST['odOrd'] != "" and $_POST['doOrd'] != "" and $_POST['poplatek'] != "" and $_POST['idPron'] != "" and $_POST['idExp'] != "" and dates($_POST['odOrd'], $_POST['doOrd']) and ctype_digit($_POST['poplatek']) and idInDb($_POST['idPron'], "pronajimatel", $db) and idInDb($_POST['idExp'], "expozice", $db)) {
+	if ($_POST['odOrd'] != "" and $_POST['doOrd'] != "" and $_POST['poplatek'] != "" and $_POST['idPron'] != "" and $_POST['idExp'] != "" and dates($_POST['odOrd'], $_POST['doOrd']) and idInDb($_POST['idPron'], "pronajimatel", $db) and idInDb($_POST['idExp'], "expozice", $db)) {
 		$query = "UPDATE `objednavka` SET `od`='".$_POST['odOrd']."', `do`='".$_POST['doOrd']."', `poplatek`='".$_POST['poplatek']."', `id_pronajimatele`='".$_POST['idPron']."', `id_expozice`='".$_POST['idExp']."' WHERE `id_objednavka`=".$_SESSION['editId'].";";
 		if (mysql_query($query)) {
 			echo "<script>alert('Success!');</script>";
@@ -53,7 +53,7 @@ if (isset($_POST['orderEdit'])) {
 }
 
 if (isset($_POST['lessorEdit'])) {
-	if ($_POST['nazev'] != "" and $_POST['kontakt'] != "" and $_POST['poplatek'] != "" and ctype_digit($_POST['poplatek'])) {
+	if ($_POST['nazev'] != "" and $_POST['kontakt'] != "" and $_POST['poplatek'] != "") {
 		$query = "UPDATE `pronajimatel` SET `nazev`='".$_POST['nazev']."', `kontakt`='".$_POST['kontakt']."', `poplatek`='".$_POST['poplatek']."' WHERE `id_pronajimatel`=".$_SESSION['editId'].";";
 		if (mysql_query($query)) {
 			echo "<script>alert('Success!');</script>";

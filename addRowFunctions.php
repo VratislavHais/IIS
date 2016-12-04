@@ -84,7 +84,7 @@ if (isset($_POST['room1'])) {
 }
 
 if (isset($_POST['order1'])) {
-	if ($_POST['odOrd'] != "" and $_POST['doOrd'] != "" and $_POST['poplatek'] != "" and $_POST['idPron'] != "" and $_POST['idExp'] != "" and dates($_POST['odOrd'], $_POST['doOrd']) and ctype_digit($_POST['poplatek']) and idInDb($_POST['idPron'], "pronajimatel", $db) and idInDb($_POST['idExp'], "expozice", $db)) {
+	if ($_POST['odOrd'] != "" and $_POST['doOrd'] != "" and $_POST['poplatek'] != "" and $_POST['idPron'] != "" and $_POST['idExp'] != "" and dates($_POST['odOrd'], $_POST['doOrd']) and idInDb($_POST['idPron'], "pronajimatel", $db) and idInDb($_POST['idExp'], "expozice", $db)) {
 		$query = "INSERT INTO `xhaisv00`.`objednavka` (`id_objednavka`, `od`, `do`, `poplatek`, `id_pronajimatele`, `id_expozice`, `id_zamestnance`) VALUES (NULL, '".$_POST['odOrd']."', '".$_POST['doOrd']."', '".$_POST['poplatek']."', '".$_POST['idPron']."', '".$_POST['idExp']."', '".$_SESSION['id']."');";
 		if (mysql_query($query)) {
 			echo "<script>alert('Success!');</script>";
@@ -102,7 +102,7 @@ if (isset($_POST['order1'])) {
 }
 
 if (isset($_POST['lessor1'])) {
-	if ($_POST['nazev'] != "" and $_POST['kontakt'] != "" and $_POST['poplatek'] != "" and ctype_digit($_POST['poplatek'])) {
+	if ($_POST['nazev'] != "" and $_POST['kontakt'] != "" and $_POST['poplatek'] != "") {
 		$query = "INSERT INTO `xhaisv00`.`pronajimatel` (`id_pronajimatel`, `nazev`, `kontakt`, `poplatek`) VALUES (NULL, '".$_POST['nazev']."', '".$_POST['kontakt']."', '".$_POST['poplatek']."');";
 		if (mysql_query($query)) {
 			echo "<script>alert('Success!');</script>";

@@ -46,9 +46,9 @@ CREATE TABLE `objednavka` (
 ) AUTO_INCREMENT=1;
 
 INSERT INTO `objednavka` (`id_objednavka`, `od`, `do`, `poplatek`, `id_pronajimatele`, `id_expozice`, `id_zamestnance`) VALUES
-(NULL, '2016-04-12', '2016-05-12', 'ano', '3', '2', '1'),
-(NULL, '2016-04-01', '2016-05-05', 'ne', '1', '3', '1'),
-(NULL, '2016-03-12', '2016-04-12', 'ano', '2', '1', '2');
+(NULL, '2016-04-12', '2016-05-12', 'yes', '3', '2', '1'),
+(NULL, '2016-04-01', '2016-05-05', 'no', '1', '3', '1'),
+(NULL, '2016-03-12', '2016-04-12', 'yes', '2', '1', '2');
 
 DROP TABLE IF EXISTS `pronajimatel`;
 CREATE TABLE `pronajimatel` (
@@ -60,9 +60,9 @@ CREATE TABLE `pronajimatel` (
 ) AUTO_INCREMENT=1;
 
 INSERT INTO `pronajimatel` (`id_pronajimatel`, `nazev`, `kontakt`, `poplatek`) VALUES
-(NULL, 'UMPRUM', '731548762', 'ano'),
-(NULL, 'Pavel Novák', '609548795', 'ne'),
-(NULL, 'Antotnín kratochvíl', '581548221', 'ano');
+(NULL, 'UMPRUM', '731548762', 'yes'),
+(NULL, 'Pavel Novák', '609548795', 'no'),
+(NULL, 'Antotnín kratochvíl', '581548221', 'yes');
 
 DROP TABLE IF EXISTS `umelec`;
 CREATE TABLE `umelec` (
