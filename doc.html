@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=iso-8859-2"/>
+    <title>Projekt IIS</title>
+    <style type="text/css">
+    	table { border-collapse: collapse; }
+    	td, th { border: 1px solid black; padding: 0.3em 0.5em; text-align: left; }
+    	dt { font-weight: bold; margin-top: 0.5em; }
+    </style>
+</head>
+<body>
+
+
+<h1>Galerie</h1> 
+
+<dl>
+	<dt>Autori</dt>
+	<dd>Vratislav Hais 
+	    <a href="mailto:xhaisv00@stud.fit.vutbr.cz">xhaisv00@stud.fit.vutbr.cz</a> -
+		php skripty, funkcnost
+	</dd>
+	<dd>Patrik Čigáš 
+	    <a href="mailto:xautor02@stud.fit.vutbr.cz">xautor02@stud.fit.vutbr.cz</a> - 
+		vzhled (html/css), databaze
+	</dd>
+	<dt>URL aplikace</dt>
+	<dd><a href="http://www.stud.fit.vutbr.cz/~xhaisv00/IIS">http://www.stud.fit.vutbr.cz/~xhaisv00/IIS</a></dd>
+</dl>
+
+<h2>Uzivatele systemu pro testovani</h2>
+<table>
+<tr><th>Login</th><th>Heslo</th><th>Role</th></tr>
+<tr><td>admin</td><td>heslo</td><td>Administrator</td></tr>
+<tr><td>user</td><td>heslo</td><td>Zamestnanec</td></tr>
+</table>
+
+<h2>Implementace</h2>
+<p>Aplikace se spousti skriptem index.php, ktery obsahuje prihlasovaci stranku. Po uspesnem prihlaseni do systemu se dale pracuje pouze se skriptem menu.php, ktery vyuziva ostatni soubory: 
+<ul>
+	<li>tableOutput.php - vykresleni tabulek s daty + formulare pro pridavani novych zaznamu</li>
+	<li>addRowFunctions.php - vyhodnoceni formularu pro pridani dat + pridani dat do databaze</li>
+	<li>restartForms.php - formulare vykreslujici se po zadani nevalidnich dat do formularu. Formulare obsahuji uzivatelem predem vyplnena data</li>
+	<li>editRowForms.php - vykresluje formulare pro editaci dat v databazi</li>
+	<li>editRowFunctions.php - kontrola validity zadanych dat + uprava dat v databazi</li>
+	<li>roomEquipment.php - vykresleni tabulek s daty z databaze (pouze tabulka `vybaveni_mistnosti`)</li> 
+</ul>
+Dalsi obsazene soubory:
+<ul>
+	<li>dbInit.php - inicializace databaze </li>
+	<li>login.html - formulare pro prihlaseni </li>
+	<li>style.css - kaskadovy styl pro vzhled stranek </li>
+	<li>database.sql - databaze + plneni daty </li>
+</ul>
+</p>
+
+<h2>Instalace</h2>
+<ul>
+<li>Zkopirujte vsechny soubory na server</li>
+<li>Importujte databazi ze skriptu database.sql</li>
+<li>Aplikace vyzaduje PHP5 a MySQL5</li>
+</ul>
+
+<h2>Známé problémy</h2>
+<p>Z casovych duvodu nebyla implementovana funkce na poslani upominky na platbu a sprava poplatku.</p>
+
+</body>
+</html>
